@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('owners', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        Schema::create('raysha_vaccinations', function (Blueprint $table) {
+    $table->id();
+    $table->string('pet_name');
+    $table->string('vaccine_type');
+    $table->date('vaccination_date');
+    $table->text('notes')->nullable();
+    $table->timestamps();
+});
+
     }
 
     /**
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('owners');
+        Schema::dropIfExists('raysha_vaccinations');
     }
 };

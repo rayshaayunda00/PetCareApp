@@ -9,7 +9,7 @@ class PublicController extends Controller
 {
     public function index()
     {
-        $dokters = DokterHewan::all(); // ambil semua dokter
-        return view('public.home', compact('dokters'));
+        $dokters = DokterHewan::all(); // Ambil semua dokter dari DB
+        return view('public.home', compact('dokters')); // dikirim ke public/home.blade.php
     }
 }

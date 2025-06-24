@@ -82,6 +82,7 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/616/616404.png" width="80" class="mx-auto mt-3">
                     <h5 class="mt-3">Penitipan Hewan</h5>
                     <p>Jasa penitipan hewan selama Anda bepergian, dengan pengawasan dokter.</p>
+                    
                 </div>
             </div>
         </div>

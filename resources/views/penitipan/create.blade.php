@@ -78,6 +78,22 @@
                 <input type="number" name="age" id="age" class="form-control" required>
             </div>
 
+            <div class="mb-3">
+    <label for="start_date" class="form-label">Tanggal Mulai Penitipan</label>
+    <input type="date" name="start_date" id="start_date" class="form-control" required>
+</div>
+
+<div class="mb-3">
+    <label for="end_date" class="form-label">Tanggal Selesai Penitipan</label>
+    <input type="date" name="end_date" id="end_date" class="form-control">
+</div>
+
+<div class="mb-3">
+    <label for="notes" class="form-label">Catatan Tambahan</label>
+    <textarea name="notes" id="notes" class="form-control"></textarea>
+</div>
+
+
             <button type="submit" class="btn btn-primary w-100">Kirim Data Penitipan</button>
         </form>
     </div>

@@ -20,8 +20,10 @@ Route::get('/layanan/{id}', [PublicLayananController::class, 'show'])->name('lay
 // Route::get('/penitipan-form', [PenitipanController::class, 'form'])->name('penitipan.form');
 // Route::post('/penitipan-form', [PenitipanController::class, 'submit'])->name('penitipan.submit');
 // Penitipan (Form User Biasa)
-Route::get('/penitipan-form', [PenitipanController::class, 'create'])->name('penitipan.form');
-Route::post('/penitipan-form', [PenitipanController::class, 'store'])->name('penitipan.submit');
+// Penitipan (Form User Biasa)
+Route::get('/penitipan-form', [PenitipanController::class, 'formPublic'])->name('penitipan.form');
+Route::post('/penitipan-form', [PenitipanController::class, 'submitPublic'])->name('penitipan.submit');
+
 
 // Vaksinasi
 Route::get('/vaksinasi', [VaccinationController::class, 'form'])->name('vaccination.form');

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Owner;
 use App\Models\Pet;
+use App\Models\Penitipan;
 
 class PenitipanController extends Controller
 {
+    // ================= ADMIN =================
+
     public function index()
     {
         $owners = Owner::with('pets')->get();
@@ -16,37 +19,52 @@ class PenitipanController extends Controller
 
     public function create()
     {
-        return view('penitipan.create');
+        return view('penitipan.create'); // Admin create
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name'     => 'required',
-            'phone'    => 'required',
-            'address'  => 'required',
-            'pet_name' => 'required',
-            'species'  => 'required',
-            'breed'    => 'required',
-            'age'      => 'required|integer',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'name'        => 'required',
+        'phone'       => 'required',
+        'address'     => 'required',
+        'pet_name'    => 'required',
+        'species'     => 'required',
+        'breed'       => 'required',
+        'age'         => 'required|integer',
+        'start_date'  => 'required|date',
+        'end_date'    => 'nullable|date|after_or_equal:start_date',
+        'notes'       => 'nullable|string',
+    ]);
 
-        $owner = Owner::create([
-            'name'    => $request->name,
-            'phone'   => $request->phone,
-            'address' => $request->address,
-        ]);
+    // Simpan Owner
+    $owner = Owner::create([
+        'name'    => $request->name,
+        'phone'   => $request->phone,
+        'address' => $request->address,
+    ]);
 
-        Pet::create([
-            'owner_id' => $owner->id,
-            'name'     => $request->pet_name,
-            'species'  => $request->species,
-            'breed'    => $request->breed,
-            'age'      => $request->age,
-        ]);
+    // Simpan Pet
+    $pet = Pet::create([
+        'owner_id' => $owner->id,
+        'name'     => $request->pet_name,
+        'species'  => $request->species,
+        'breed'    => $request->breed,
+        'age'      => $request->age,
+    ]);
 
-        return redirect()->route('penitipan.index')->with('success', 'Data berhasil ditambahkan.');
-    }
+    // Simpan Penitipan
+    Penitipan::create([
+        'owner_id'   => $owner->id,
+        'pet_id'     => $pet->id,
+        'start_date' => $request->start_date,
+        'end_date'   => $request->end_date,
+        'status'     => 'aktif',
+        'notes'      => $request->notes,
+    ]);
+
+    return back()->with('success', 'Data penitipan berhasil disimpan!');
+}
 
     public function show($id)
     {
@@ -96,4 +114,56 @@ class PenitipanController extends Controller
         $owner->delete();
         return redirect()->route('penitipan.index')->with('success', 'Data berhasil dihapus.');
     }
+
+    // ================= FORM PUBLIC =================
+
+    public function formPublic()
+    {
+        return view('penitipan.create');
+    }
+
+public function submitPublic(Request $request)
+{
+    $request->validate([
+        'name'        => 'required',
+        'phone'       => 'required',
+        'address'     => 'required',
+        'pet_name'    => 'required',
+        'species'     => 'required',
+        'breed'       => 'required',
+        'age'         => 'required|integer',
+        'start_date'  => 'required|date',
+        'end_date'    => 'nullable|date|after_or_equal:start_date',
+        'notes'       => 'nullable|string',
+    ]);
+
+    // Simpan Owner
+    $owner = Owner::create([
+        'name'    => $request->name,
+        'phone'   => $request->phone,
+        'address' => $request->address,
+    ]);
+
+    // Simpan Pet
+    $pet = Pet::create([
+        'owner_id' => $owner->id,
+        'name'     => $request->pet_name,
+        'species'  => $request->species,
+        'breed'    => $request->breed,
+        'age'      => $request->age,
+    ]);
+
+    // Simpan Penitipan
+    Penitipan::create([
+        'owner_id'   => $owner->id,
+        'pet_id'     => $pet->id,
+        'start_date' => $request->start_date,
+        'end_date'   => $request->end_date,
+        'status'     => 'aktif',
+        'notes'      => $request->notes,
+    ]);
+
+    return back()->with('success', 'Data penitipan berhasil disimpan!');
+}
+
 }

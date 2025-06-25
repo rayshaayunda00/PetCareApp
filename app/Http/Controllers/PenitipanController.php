@@ -8,20 +8,26 @@ use App\Models\Pet;
 
 class PenitipanController extends Controller
 {
-    public function form()
+    public function index()
     {
-        return view('penitipan.form');
+        $owners = Owner::with('pets')->get();
+        return view('penitipan.index', compact('owners'));
     }
 
-    public function submit(Request $request)
+    public function create()
+    {
+        return view('penitipan.create');
+    }
+
+    public function store(Request $request)
     {
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'phone'    => 'required|string|max:20',
-            'address'  => 'required|string',
-            'pet_name' => 'required|string|max:255',
-            'species'  => 'required|string|max:100',
-            'breed'    => 'required|string|max:100',
+            'name'     => 'required',
+            'phone'    => 'required',
+            'address'  => 'required',
+            'pet_name' => 'required',
+            'species'  => 'required',
+            'breed'    => 'required',
             'age'      => 'required|integer',
         ]);
 
@@ -39,6 +45,55 @@ class PenitipanController extends Controller
             'age'      => $request->age,
         ]);
 
-        return redirect()->route('penitipan.form')->with('success', 'Data penitipan berhasil disimpan!');
+        return redirect()->route('penitipan.index')->with('success', 'Data berhasil ditambahkan.');
+    }
+
+    public function show($id)
+    {
+        $owner = Owner::with('pets')->findOrFail($id);
+        return view('penitipan.show', compact('owner'));
+    }
+
+    public function edit($id)
+    {
+        $owner = Owner::with('pets')->findOrFail($id);
+        return view('penitipan.edit', compact('owner'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name'     => 'required',
+            'phone'    => 'required',
+            'address'  => 'required',
+            'pet_name' => 'required',
+            'species'  => 'required',
+            'breed'    => 'required',
+            'age'      => 'required|integer',
+        ]);
+
+        $owner = Owner::findOrFail($id);
+        $owner->update([
+            'name'    => $request->name,
+            'phone'   => $request->phone,
+            'address' => $request->address,
+        ]);
+
+        $pet = $owner->pets->first();
+        $pet->update([
+            'name'    => $request->pet_name,
+            'species' => $request->species,
+            'breed'   => $request->breed,
+            'age'     => $request->age,
+        ]);
+
+        return redirect()->route('penitipan.index')->with('success', 'Data berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $owner = Owner::findOrFail($id);
+        $owner->delete();
+        return redirect()->route('penitipan.index')->with('success', 'Data berhasil dihapus.');
     }
 }

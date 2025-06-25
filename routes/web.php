@@ -8,6 +8,8 @@ use App\Http\Controllers\CheckupController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Middleware\AdminMiddleware;
+
 
 // =================== Halaman Publik =====================
 Route::get('/', [PublicController::class, 'index'])->name('home');
@@ -42,10 +44,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 
 // =================== Halaman Admin (Khusus Admin) =====================
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 
-    // CRUD Penitipan Data Admin (Tabel Data Penitipan)
+    // CRUD Penitipan
     Route::get('/admin/penitipan', [PenitipanController::class, 'index'])->name('penitipan.index');
     Route::get('/admin/penitipan/create', [PenitipanController::class, 'create'])->name('penitipan.create');
     Route::post('/admin/penitipan', [PenitipanController::class, 'store'])->name('penitipan.store');
@@ -53,6 +55,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/penitipan/{id}/edit', [PenitipanController::class, 'edit'])->name('penitipan.edit');
     Route::put('/admin/penitipan/{id}', [PenitipanController::class, 'update'])->name('penitipan.update');
     Route::delete('/admin/penitipan/{id}', [PenitipanController::class, 'destroy'])->name('penitipan.destroy');
+
+    // ✅ CRUD Vaksinasi
+    Route::get('/admin/vaccination', [VaccinationController::class, 'index'])->name('vaccination.index');
+    Route::get('/admin/vaccination/create', [VaccinationController::class, 'create'])->name('vaccination.create');
+    Route::post('/admin/vaccination', [VaccinationController::class, 'store'])->name('vaccination.store');
+    Route::get('/admin/vaccination/{id}', [VaccinationController::class, 'show'])->name('vaccination.show');
+    Route::get('/admin/vaccination/{id}/edit', [VaccinationController::class, 'edit'])->name('vaccination.edit');
+    Route::put('/admin/vaccination/{id}', [VaccinationController::class, 'update'])->name('vaccination.update');
+    Route::delete('/admin/vaccination/{id}', [VaccinationController::class, 'destroy'])->name('vaccination.destroy');
 });
 
 // =================== Halaman User (User Biasa) =====================

@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Data Periksa Kesehatan Hewan</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Daftar Periksa Kesehatan Hewan</h2>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h2 class="mb-4">Daftar Periksa Kesehatan Hewan</h2>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered">
-        <thead class="table-dark">
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark text-center">
             <tr>
                 <th>No</th>
                 <th>Nama Hewan</th>
@@ -26,20 +21,24 @@
                 <th>Tindakan / Perawatan</th>
             </tr>
         </thead>
-       <tbody>
-    @foreach($checkups as $checkup)
-        <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $checkup->pet_name }}</td>
-            <td>{{ $checkup->species }}</td>
-            <td>{{ $checkup->vet_name }}</td>
-            <td>{{ $checkup->specialization }}</td>
-            <td>{{ $checkup->date }}</td>
-            <td>{{ $checkup->diagnosis }}</td>
-            <td>{{ $checkup->treatment }}</td>
-        </tr>
-    @endforeach
-</tbody>
+        <tbody>
+            @forelse($checkups as $checkup)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $checkup->pet_name }}</td>
+                    <td>{{ $checkup->species }}</td>
+                    <td>{{ $checkup->vet_name }}</td>
+                    <td>{{ $checkup->specialization }}</td>
+                    <td>{{ \Carbon\Carbon::parse($checkup->date)->format('d M Y') }}</td>
+                    <td>{{ $checkup->diagnosis }}</td>
+                    <td>{{ $checkup->treatment }}</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="8" class="text-center">Belum ada data periksa kesehatan.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
 </div>
-</body>
-</html>
+@endsection

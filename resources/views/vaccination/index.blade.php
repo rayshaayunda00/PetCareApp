@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Data Vaksinasi Hewan</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-    <!-- Bootstrap CSS & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body>
-
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Data Vaksinasi Hewan</h2>
+@section('content')
+<div class="container">
+    <h2 class="mb-4">Data Vaksinasi Hewan</h2>
 
     <a href="{{ route('vaccination.create') }}" class="btn btn-success mb-3">
         <i class="bi bi-plus-circle"></i> Tambah Data Vaksinasi
@@ -67,6 +57,4 @@
         </tbody>
     </table>
 </div>
-
-</body>
-</html>
+@endsection

@@ -57,7 +57,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Hewan</th>
-                    <th>Jenis Vaksin</th>
+                    <th>Keluhan</th>
                     <th>Tanggal Vaksinasi</th>
                     <th>Catatan</th>
                     <th>Aksi</th>

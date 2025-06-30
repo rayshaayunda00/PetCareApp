@@ -15,19 +15,22 @@ class VaccinationController extends Controller
         return view('vaccination.form');
     }
 
-    public function submit(Request $request)
-    {
-        $request->validate([
-            'pet_name'          => 'required|string|max:255',
-            'vaccine_type'      => 'required|string|max:255',
-            'vaccination_date'  => 'required|date',
-            'notes'             => 'nullable|string',
-        ]);
+public function submit(Request $request)
+{
+    $request->validate([
+        'pet_name'          => 'required|string|max:255',
+        'vaccine_type'      => 'required|string|max:255',
+        'vaccination_date'  => 'required|date',
+        'notes'             => 'nullable|string',
+    ]);
 
-        Vaccination::create($request->all());
+    $vaccination = Vaccination::create($request->all());
 
-        return redirect()->route('vaccination.form')->with('success', 'Data vaksinasi berhasil disimpan!');
-    }
+    return back()
+        ->with('success', 'Data vaksinasi berhasil disimpan!')
+        ->with('vaccination', $vaccination);
+}
+
 
     // ================= ADMIN =================
 

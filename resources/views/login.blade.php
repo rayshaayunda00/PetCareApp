@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - PetCareDB</title>
+    <title>Login - PetCareApp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap & Icons -->
@@ -15,6 +15,8 @@
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(to right, #1e67a8, #57a3d9);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .navbar {
@@ -22,9 +24,11 @@
         }
 
         .login-container {
-            margin-top: 100px;
+            flex: 1;
             display: flex;
+            align-items: center;
             justify-content: center;
+            padding: 60px 20px;
         }
 
         .login-box {
@@ -33,17 +37,25 @@
             padding: 30px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
+            position: relative;
+            text-align: center;
         }
 
         .login-title {
             font-weight: 600;
             color: #1e67a8;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+        }
+
+        .login-box img.pet-icon {
+            width: 70px;
+            margin-bottom: 15px;
         }
 
         .form-group {
             position: relative;
+            text-align: left;
         }
 
         .form-group i {
@@ -74,9 +86,9 @@
         footer {
             background: #1e67a8;
             color: white;
-            padding: 20px 0;
-            margin-top: 80px;
-            border-radius: 30px 30px 0 0;
+            padding: 16px 0;
+            text-align: center;
+            font-size: 14px;
         }
 
         .error-msg {
@@ -89,7 +101,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="{{ url('/') }}">PetCareDB</a>
+        <a class="navbar-brand fw-bold" href="{{ url('/') }}">PetCareApp</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -104,10 +116,12 @@
     </div>
 </nav>
 
-<!-- Login Box -->
-<div class="container login-container">
+<!-- Login Content -->
+<div class="login-container">
     <div class="login-box">
-        <h4 class="text-center login-title">Login Admin / User</h4>
+        <!-- Icon PetCareApp dari internet -->
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616430.png" alt="PetCareApp Icon" class="pet-icon">
+        <h4 class="login-title">Login Admin / User</h4>
 
         @if($errors->any())
             <div class="alert alert-danger text-center error-msg">
@@ -132,8 +146,9 @@
     </div>
 </div>
 
-<footer class="text-center">
-    &copy; {{ date('Y') }} PetCareDB. All Rights Reserved.
+<!-- Footer -->
+<footer>
+    &copy; {{ date('Y') }} PetCareApp. All Rights Reserved.
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

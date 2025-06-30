@@ -9,6 +9,7 @@ class VaccinationController extends Controller
 {
     // ================= PUBLIC =================
 
+
     public function form()
     {
         return view('vaccination.form');

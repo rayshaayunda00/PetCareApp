@@ -60,9 +60,11 @@
                 <li class="nav-item"><a class="nav-link" href="#dokter">Dokter Hewan</a></li>
                 <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
                 @guest
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-light text-primary btn-sm ms-2" href="{{ route('login') }}">Login Admin</a>
-                    </li>
+                   <li class="nav-item">
+    <a class="nav-link btn btn-light text-dark btn-sm ms-2" href="{{ route('login') }}">Login</a>
+</li>
+
+
                 @endguest
                 @auth
                     @if(Auth::user()->role === 'admin')

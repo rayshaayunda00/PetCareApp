@@ -17,4 +17,12 @@ class Pet extends Model
     {
         return $this->belongsTo(Owner::class, 'owner_id');
     }
+
+    // App\Models\Pet.php
+
+public function penitipan()
+{
+    return $this->hasOne(Penitipan::class, 'pet_id');
+}
+
 }

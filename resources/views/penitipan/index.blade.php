@@ -85,19 +85,27 @@
                     <th>Spesies</th>
                     <th>Ras</th>
                     <th>Usia</th>
+                    <th>Tgl Mulai</th>
+                    <th>Tgl Selesai</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($owners as $owner)
+                    @php
+                        $pet = $owner->pets->first();
+                        $penitipan = $pet?->penitipan;
+                    @endphp
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $owner->name }}</td>
                         <td>{{ $owner->address }}</td>
-                        <td>{{ $owner->pets->first()->name ?? '-' }}</td>
-                        <td>{{ $owner->pets->first()->species ?? '-' }}</td>
-                        <td>{{ $owner->pets->first()->breed ?? '-' }}</td>
-                        <td>{{ $owner->pets->first()->age ?? '-' }}</td>
+                        <td>{{ $pet->name ?? '-' }}</td>
+                        <td>{{ $pet->species ?? '-' }}</td>
+                        <td>{{ $pet->breed ?? '-' }}</td>
+                        <td>{{ $pet->age ?? '-' }}</td>
+                        <td>{{ $penitipan ? \Carbon\Carbon::parse($penitipan->start_date)->format('d-m-Y') : '-' }}</td>
+                        <td>{{ $penitipan && $penitipan->end_date ? \Carbon\Carbon::parse($penitipan->end_date)->format('d-m-Y') : '-' }}</td>
                         <td class="text-center">
                             <a href="{{ route('penitipan.show', $owner->id) }}" class="btn btn-info btn-sm btn-rounded mb-1">
                                 <i class="bi bi-eye"></i>
@@ -116,7 +124,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center text-muted">Belum ada data penitipan.</td>
+                        <td colspan="10" class="text-center text-muted">Belum ada data penitipan.</td>
                     </tr>
                 @endforelse
             </tbody>

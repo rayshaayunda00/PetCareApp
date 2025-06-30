@@ -163,7 +163,21 @@ public function submitPublic(Request $request)
         'notes'      => $request->notes,
     ]);
 
-    return back()->with('success', 'Data penitipan berhasil disimpan!');
+    return back()
+    ->with('success', 'Data penitipan berhasil disimpan!')
+    ->with('penitipan', (object)[
+        'name'        => $owner->name,
+        'phone'       => $owner->phone,
+        'address'     => $owner->address,
+        'pet_name'    => $pet->name,
+        'species'     => $pet->species,
+        'breed'       => $pet->breed,
+        'age'         => $pet->age,
+        'start_date'  => $request->start_date,
+        'end_date'    => $request->end_date,
+        'notes'       => $request->notes,
+    ]);
+
 }
 
 }

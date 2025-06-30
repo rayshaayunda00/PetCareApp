@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Vet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class DoctorController extends Controller
 {
@@ -18,7 +20,7 @@ class DoctorController extends Controller
         return view('admin.dokter.create');
     }
 
-    public function store(Request $request)
+   public function store(Request $request)
 {
     $validated = $request->validate([
         'name' => 'required|string|max:255',
@@ -27,13 +29,9 @@ class DoctorController extends Controller
         'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ]);
 
-    // Tambahkan default image null
-    $validated['image'] = null;
-
     if ($request->hasFile('image')) {
-        $filename = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('uploads/vets'), $filename);
-        $validated['image'] = 'uploads/vets/' . $filename;
+        $path = $request->file('image')->store('vets', 'public');
+        $validated['image'] = 'storage/' . $path; // disimpan untuk ditampilkan di view
     }
 
     Vet::create($validated);
@@ -42,13 +40,14 @@ class DoctorController extends Controller
 }
 
 
+
     public function edit($id)
     {
         $vet = Vet::findOrFail($id);
         return view('admin.dokter.edit', compact('vet'));
     }
 
-    public function update(Request $request, $id)
+   public function update(Request $request, $id)
 {
     $vet = Vet::findOrFail($id);
 
@@ -59,22 +58,21 @@ class DoctorController extends Controller
         'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ]);
 
-    // Jika ada file baru
     if ($request->hasFile('image')) {
-        // Hapus gambar lama jika ada
+        // Hapus file lama jika ada
         if ($vet->image && file_exists(public_path($vet->image))) {
             unlink(public_path($vet->image));
         }
 
-        $filename = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('uploads/vets'), $filename);
-        $validated['image'] = 'uploads/vets/' . $filename;
+        $path = $request->file('image')->store('vets', 'public');
+        $validated['image'] = 'storage/' . $path;
     }
 
     $vet->update($validated);
 
     return redirect()->route('doctors.index')->with('success', 'Data dokter berhasil diperbarui.');
 }
+
 
 
     public function destroy($id)

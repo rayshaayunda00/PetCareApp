@@ -227,7 +227,7 @@
             innerContainer.innerHTML += `
                 <div class="col-md-6">
                     <div class="card p-3 text-center">
-                        <img src="${doctor.img}" width="80" class="mx-auto mt-3 rounded-circle shadow-sm">
+                        <img src="${doctor.img}" width="250 #" class="mx-auto mt-3  shadow-sm">
                         <h5 class="mt-3 fw-semibold">${doctor.name}</h5>
                         <p>${doctor.specialty}</p>
                     </div>

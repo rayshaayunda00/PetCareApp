@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vaccination;
+use App\Models\Vet; 
 
 class VaccinationController extends Controller
 {
@@ -24,11 +25,18 @@ public function submit(Request $request)
         'notes'             => 'nullable|string',
     ]);
 
-    $vaccination = Vaccination::create($request->all());
+    $vaccination = Vaccination::create($request->only([
+        'pet_name', 'vaccine_type', 'vaccination_date', 'notes'
+    ]));
+
+    // Ambil nama dokter secara acak dari tabel vets
+    $randomVet = Vet::inRandomOrder()->first();
+    $doctorName = $randomVet ? $randomVet->name : 'Tidak tersedia';
 
     return back()
         ->with('success', 'Data vaksinasi berhasil disimpan!')
-        ->with('vaccination', $vaccination);
+        ->with('vaccination', $vaccination)
+        ->with('doctor_name', $doctorName);
 }
 
 

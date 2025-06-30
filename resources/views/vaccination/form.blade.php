@@ -70,6 +70,7 @@
 
 @if(session('vaccination'))
 <!-- Modal Popup Struk -->
+<!-- Modal Popup Struk -->
 <div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-4">
@@ -84,6 +85,7 @@
                 @if(session('vaccination')->notes)
                     <p><strong>Catatan:</strong> {{ session('vaccination')->notes }}</p>
                 @endif
+                <p><strong>Nama Dokter:</strong> {{ session('doctor_name') ?? 'Tidak tersedia' }}</p>
             </div>
             <div class="modal-footer">
                 <button onclick="printReceipt()" class="btn btn-success">Unduh Struk</button>
@@ -93,6 +95,7 @@
     </div>
 </div>
 
+
 <script>
     function printReceipt() {
         var printContents = document.getElementById('receipt-content').innerHTML;
@@ -100,7 +103,8 @@
         document.body.innerHTML = printContents;
         window.print();
         document.body.innerHTML = originalContents;
-        location.reload();
+        window.location.href = "{{ route('vaccination.form') }}";
+
     }
 
     window.onload = function () {

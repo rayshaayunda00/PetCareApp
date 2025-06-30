@@ -87,6 +87,7 @@
                 <p><strong>Nama Pemilik:</strong> {{ session('checkup')->pet_name }}</p>
                 <p><strong>Spesies:</strong> {{ session('checkup')->species }}</p>
                 <p><strong>Umur Hewan:</strong> {{ session('checkup')->vet_name }}</p>
+                <p><strong>Nama Dokter:</strong> {{ session('doctor_name') ?? 'Tidak tersedia' }}</p>
                 <p><strong>Tanggal Periksa:</strong> {{ \Carbon\Carbon::parse(session('checkup')->date)->format('d M Y') }}</p>
                 <p><strong>Keluhan / Gejala:</strong> {{ session('checkup')->treatment }}</p>
             </div>
@@ -105,7 +106,7 @@
         document.body.innerHTML = printContents;
         window.print();
         document.body.innerHTML = originalContents;
-        location.reload();
+        window.location.href = "{{ route('checkup.form') }}";
     }
 
     window.onload = function () {

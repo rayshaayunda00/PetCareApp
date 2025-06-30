@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Checkup;
+use App\Models\Vet;
 
 class CheckupController extends Controller
 {
@@ -17,23 +18,29 @@ class CheckupController extends Controller
         $request->validate([
             'pet_name'  => 'required|string',
             'species'   => 'required|string',
-            'vet_name'  => 'required|string',
+            'vet_name'  => 'required|string', // Ini maksudnya: umur hewan
             'date'      => 'required|date',
             'treatment' => 'required|string',
         ]);
 
+        // Simpan data pemeriksaan
         $checkup = Checkup::create([
             'pet_name'  => $request->pet_name,
             'species'   => $request->species,
-            'vet_name'  => $request->vet_name,
+            'vet_name'  => $request->vet_name, // "vet_name" sebagai umur hewan
             'date'      => $request->date,
             'treatment' => $request->treatment,
         ]);
 
-        // Tetap di halaman form, kirim data untuk pop-up struk
+        // Ambil nama dokter secara acak (tidak disimpan ke DB)
+        $randomVet = Vet::inRandomOrder()->first();
+        $doctorName = $randomVet ? $randomVet->name : 'Tidak tersedia';
+
+        // Kirim data ke session (termasuk nama dokter)
         return back()
             ->with('success', 'Data berhasil disimpan!')
-            ->with('checkup', $checkup);
+            ->with('checkup', $checkup)
+            ->with('doctor_name', $doctorName);
     }
 
     public function index()

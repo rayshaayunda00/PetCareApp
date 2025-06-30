@@ -4,9 +4,12 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold text-primary">Data Dokter</h2>
-        <a href="{{ route('doctors.create') }}" class="btn btn-primary rounded-pill">
-            <i class="bi bi-plus-lg"></i> Tambah Dokter
-        </a>
+
+        @if(Auth::user()->role !== 'admin_super')
+            <a href="{{ route('doctors.create') }}" class="btn btn-primary rounded-pill">
+                <i class="bi bi-plus-lg"></i> Tambah Dokter
+            </a>
+        @endif
     </div>
 
     @if(session('success'))
@@ -31,7 +34,7 @@
                             <tr>
                                 <td>
                                     @if ($vet->image)
-                                            <img src="{{ asset($vet->image) }}" width="100" class="shadow-sm" alt="Foto Dokter">
+                                        <img src="{{ asset($vet->image) }}" width="100" class="shadow-sm" alt="Foto Dokter">
                                     @else
                                         <span class="text-muted">Tidak ada</span>
                                     @endif
@@ -40,17 +43,22 @@
                                 <td>{{ $vet->specialization }}</td>
                                 <td>{{ $vet->phone }}</td>
                                 <td>
-                                    <a href="{{ route('doctors.edit', $vet->id) }}" class="btn btn-sm btn-warning rounded-pill">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <form action="{{ route('doctors.destroy', $vet->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus dokter ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger rounded-pill">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
+    @if(Auth::user()->role !== 'admin_super')
+        <a href="{{ route('doctors.edit', $vet->id) }}" class="btn btn-sm btn-warning rounded-pill">
+            <i class="bi bi-pencil"></i>
+        </a>
+        <form action="{{ route('doctors.destroy', $vet->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus dokter ini?')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-danger rounded-pill">
+                <i class="bi bi-trash"></i>
+            </button>
+        </form>
+    @else
+        <span class="text-muted">Tidak tersedia</span>
+    @endif
+</td>
+
                             </tr>
                         @empty
                             <tr>

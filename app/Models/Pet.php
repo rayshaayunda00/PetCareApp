@@ -19,7 +19,7 @@ class Pet extends Model
     }
 
     // App\Models\Pet.php
-
+    
 public function penitipan()
 {
     return $this->hasOne(Penitipan::class, 'pet_id');

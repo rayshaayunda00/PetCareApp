@@ -133,6 +133,19 @@
             </div>
         </div>
 
+
+<!-- Dokter -->
+<div class="col-md-4 col-sm-6">
+    <div class="dashboard-card">
+        <div class="dashboard-icon" style="background-color: #f3e5f5; color: #6a1b9a;">
+            <i class="bi bi-person-badge-fill"></i>
+        </div>
+        <div class="dashboard-label">Dokter</div>
+        <div class="dashboard-desc">Kelola data dokter hewan klinik.</div>
+        <a href="{{ url('admin/dokter') }}" class="btn btn-secondary rounded-pill px-4">Lihat</a>
+    </div>
+</div>
+
     </div>
 </div>
 @endsection

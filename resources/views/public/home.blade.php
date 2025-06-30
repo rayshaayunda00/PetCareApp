@@ -42,6 +42,12 @@
             padding: 10px 20px;
             font-weight: 600;
         }
+        .card-no-hover {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
     </style>
 </head>
 <body>
@@ -129,7 +135,7 @@
 </section>
 
 <!-- Dokter -->
-<section id="dokter" class="container mt-5">
+{{-- <section id="dokter" class="container mt-5">
     <h2 class="text-center fw-bold mb-4">Dokter Kami</h2>
     <div class="row g-4 justify-content-center">
         <div class="col-md-5">
@@ -144,6 +150,38 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" width="80" class="mx-auto mt-3">
                 <h5 class="mt-3 fw-semibold">drh. Ahmad Firmansyah</h5>
                 <p>Spesialis Hewan Eksotik & Reptil</p>
+            </div>
+        </div>
+    </div>
+</section> --}}
+<!-- Dokter -->
+<section id="dokter" class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">Dokter Kami</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-10 position-relative">
+            <div class="card p-4 shadow-sm" style="border-radius: 20px;">
+                <div class="row align-items-center">
+                    <!-- Tombol kiri -->
+                    <div class="col-auto">
+                        <button class="btn btn-outline-secondary btn-lg" id="prevBtn">
+                            &larr;
+                        </button>
+                    </div>
+
+                    <!-- Card dokter isi -->
+                    <div class="col" id="dokter-container">
+                        <div class="row g-4 justify-content-center" id="inner-doctor-cards">
+                            <!-- Diisi oleh JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Tombol kanan -->
+                    <div class="col-auto">
+                        <button class="btn btn-outline-primary btn-lg" id="nextBtn">
+                            &rarr;
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -165,5 +203,74 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const doctors = [
+        {
+            name: "drh. Rina Andayani",
+            specialty: "Spesialis Kucing & Anjing",
+            img: "https://cdn-icons-png.flaticon.com/512/2922/2922510.png"
+        },
+        {
+            name: "drh. Ahmad Firmansyah",
+            specialty: "Spesialis Hewan Eksotik & Reptil",
+            img: "https://cdn-icons-png.flaticon.com/512/2922/2922506.png"
+        },
+        {
+            name: "drh. Lisa Pratiwi",
+            specialty: "Spesialis Hewan Kecil",
+            img: "https://cdn-icons-png.flaticon.com/512/2922/2922512.png"
+        },
+        {
+            name: "drh. Budi Santoso",
+            specialty: "Spesialis Bedah Hewan",
+            img: "https://cdn-icons-png.flaticon.com/512/2922/2922656.png"
+        }
+    ];
+
+    let currentPage = 0;
+    const perPage = 2;
+
+    function renderDoctors() {
+            const innerContainer = document.getElementById("inner-doctor-cards");
+    innerContainer.innerHTML = "";
+
+    const start = currentPage * perPage;
+    const end = start + perPage;
+    const pageDoctors = doctors.slice(start, end);
+
+    pageDoctors.forEach(doctor => {
+        innerContainer.innerHTML += `
+            <div class="col-md-6">
+                <div class="card p-3 text-center">
+                    <img src="${doctor.img}" width="80" class="mx-auto mt-3">
+                    <h5 class="mt-3 fw-semibold">${doctor.name}</h5>
+                    <p>${doctor.specialty}</p>
+                </div>
+            </div>
+        `;
+    });
+
+    document.getElementById("prevBtn").disabled = currentPage === 0;
+    document.getElementById("nextBtn").disabled = end >= doctors.length;
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+        if (currentPage > 0) {
+            currentPage--;
+            renderDoctors();
+        }
+    });
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+        if ((currentPage + 1) * perPage < doctors.length) {
+            currentPage++;
+            renderDoctors();
+        }
+    });
+
+    // Initial render
+    renderDoctors();
+</script>
+
 </body>
 </html>

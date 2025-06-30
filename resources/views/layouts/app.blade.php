@@ -97,11 +97,10 @@
         <a href="{{ route('checkup.index') }}" class="nav-link">
             <i class="bi bi-heart-pulse me-2"></i> Periksa Kesehatan
         </a>
-        @if (Route::has('doctors.index'))
-            <a href="{{ route('doctors.index') }}" class="nav-link">
-                <i class="bi bi-person-badge me-2"></i> Dokter
-            </a>
-        @endif
+        <a href="{{ route('doctors.index') }}" class="nav-link">
+    <i class="bi bi-person-badge me-2"></i> Dokter
+</a>
+
 
         <form method="POST" action="{{ route('logout') }}" class="logout-form">
             @csrf

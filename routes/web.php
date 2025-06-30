@@ -5,11 +5,13 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\PenitipanController;
 use App\Http\Controllers\PublicLayananController;
 use App\Http\Controllers\VaccinationController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\CheckupController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Middleware\AdminMiddleware;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +75,18 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     // ✅ Admin bisa lihat & hapus data checkup
     Route::get('/admin/checkup', [CheckupController::class, 'index'])->name('checkup.index');
     Route::delete('/admin/checkup/{id}', [CheckupController::class, 'destroy'])->name('checkup.destroy');
+
+    //Dokter
+    Route::resource('/admin/dokter', DoctorController::class)->names([
+    'index' => 'doctors.index',
+    'create' => 'doctors.create',
+    'store' => 'doctors.store',
+    'show' => 'doctors.show',
+    'edit' => 'doctors.edit',
+    'update' => 'doctors.update',
+    'destroy' => 'doctors.destroy',
+]);
+
 });
 
 

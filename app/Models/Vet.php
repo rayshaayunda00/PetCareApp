@@ -10,5 +10,5 @@ class Vet extends Model
     use HasFactory;
 
     protected $table = 'raysha_vets'; // Jika kamu pakai prefix tabel raysha_
-    protected $fillable = ['name', 'specialization', 'phone', 'email']; // Sesuaikan field tabelmu
+    protected $fillable = ['name', 'specialization', 'phone', 'email','image']; // Sesuaikan field tabelmu
 }

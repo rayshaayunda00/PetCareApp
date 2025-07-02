@@ -60,36 +60,38 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link active" href="#">Beranda</a></li>
-                <li class="nav-item"><a class="nav-link" href="#layanan">Layanan</a></li>
-                <li class="nav-item"><a class="nav-link" href="#dokter">Dokter Hewan</a></li>
-                <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-                @guest
-                   <li class="nav-item">
-    <a class="nav-link btn btn-light text-dark btn-sm ms-2" href="{{ route('login') }}">Login</a>
-</li>
+         <ul class="navbar-nav">
+    <li class="nav-item"><a class="nav-link active" href="#">Beranda</a></li>
+    <li class="nav-item"><a class="nav-link" href="#layanan">Layanan</a></li>
+    <li class="nav-item"><a class="nav-link" href="#dokter">Dokter Hewan</a></li>
+    <li class="nav-item"><a class="nav-link" href="#artikel">Artikel</a></li> <!-- ✅ Tambahan ini -->
+    <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
 
+    @guest
+        <li class="nav-item">
+            <a class="nav-link btn btn-light text-dark btn-sm ms-2" href="{{ route('login') }}">Login</a>
+        </li>
+    @endguest
 
-                @endguest
-                @auth
-                    @if(Auth::user()->role === 'admin')
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('admin.dashboard') }}">Dashboard Admin</a>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('user.dashboard') }}">Dashboard</a>
-                        </li>
-                    @endif
-                    <li class="nav-item">
-                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                            @csrf
-                            <button class="btn btn-outline-light btn-sm ms-2" type="submit">Logout</button>
-                        </form>
-                    </li>
-                @endauth
-            </ul>
+    @auth
+        @if(Auth::user()->role === 'admin')
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('admin.dashboard') }}">Dashboard Admin</a>
+            </li>
+        @else
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('user.dashboard') }}">Dashboard</a>
+            </li>
+        @endif
+        <li class="nav-item">
+            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                @csrf
+                <button class="btn btn-outline-light btn-sm ms-2" type="submit">Logout</button>
+            </form>
+        </li>
+    @endauth
+</ul>
+
         </div>
     </div>
 </nav>

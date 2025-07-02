@@ -16,11 +16,12 @@ class ArticleController extends Controller
 }
 
     // Detail artikel berdasarkan slug
-    public function show($slug)
-    {
-        $article = Article::where('slug', $slug)->firstOrFail();
-        return view('public.articles.show', compact('article'));
-    }
+    public function show($id)
+{
+    $article = Article::findOrFail($id);
+    return view('admin.articles.show', compact('article'));
+}
+
 
     // Admin: daftar artikel
     public function index()

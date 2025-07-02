@@ -64,6 +64,8 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
     // Penitipan
     Route::resource('/penitipan', PenitipanController::class);
+    Route::get('/penitipan/struk/{id}', [PenitipanController::class, 'cetakStruk'])->name('penitipan.receipt');
+
 
     // Vaksinasi
     Route::resource('/vaccination', VaccinationController::class);
@@ -73,6 +75,8 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
     // Pemeriksaan Kesehatan
     Route::get('/checkup', [CheckupController::class, 'index'])->name('checkup.index');
     Route::delete('/checkup/{id}', [CheckupController::class, 'destroy'])->name('checkup.destroy');
+    Route::get('/checkup/receipt/{id}', [CheckupController::class, 'receipt'])->name('checkup.receipt');
+
 
     // Artikel
     Route::get('/articles', [ArticleController::class, 'index'])->name('admin.articles.index');

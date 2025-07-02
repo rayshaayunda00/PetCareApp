@@ -11,5 +11,12 @@ class Vaccination extends Model
 
     protected $table = 'raysha_vaccinations';
 
-    protected $fillable = ['pet_name', 'vaccine_type', 'vaccination_date', 'notes'];
+    protected $fillable = [
+    'pet_name',
+    'vaccine_type',
+    'vaccination_date',
+    'notes',
+    'doctor_name',
+];
+
 }

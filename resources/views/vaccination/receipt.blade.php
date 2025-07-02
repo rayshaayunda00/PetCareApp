@@ -30,7 +30,7 @@
                 @endif
                 <tr>
                     <th>Nama Dokter</th>
-                    <td>{{ $doctorName }}</td>
+                    <td>{{ $vaccination->doctor_name ?? 'Tidak tersedia' }}</td>
                 </tr>
             </table>
             <p class="text-end mt-4">Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('d M Y, H:i') }}</p>

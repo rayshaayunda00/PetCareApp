@@ -39,6 +39,15 @@
         background-color: #e24361;
     }
 
+    .btn-success {
+        background-color: #28c76f;
+        border: none;
+    }
+
+    .btn-success:hover {
+        background-color: #20b263;
+    }
+
     .table-responsive {
         border-radius: 15px;
         overflow: hidden;
@@ -76,6 +85,7 @@
                     <th><i class="bi bi-bug icon-pet"></i>Nama Hewan</th>
                     <th><i class="bi bi-feather icon-pet"></i>Spesies</th>
                     <th><i class="bi bi-person-bounding-box icon-pet"></i>Umur</th>
+                    <th><i class="bi bi-person-vcard icon-pet"></i>Dokter</th>
                     <th><i class="bi bi-calendar-heart icon-pet"></i>Tanggal Periksa</th>
                     <th><i class="bi bi-chat-left-dots icon-pet"></i>Keluhan / Gejala</th>
                     <th><i class="bi bi-tools icon-pet"></i>Aksi</th>
@@ -88,10 +98,17 @@
                         <td>{{ $checkup->pet_name }}</td>
                         <td>{{ $checkup->species }}</td>
                         <td>{{ $checkup->vet_name }}</td>
+                        <td>{{ $checkup->doctor_name ?? '-' }}</td>
                         <td>{{ \Carbon\Carbon::parse($checkup->date)->format('d M Y') }}</td>
                         <td>{{ $checkup->treatment }}</td>
                         <td>
-                            <form action="{{ route('checkup.destroy', $checkup->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                            <!-- Tombol Struk -->
+                            <a href="{{ route('checkup.receipt', $checkup->id) }}" class="btn btn-sm btn-success mb-1 shadow-sm">
+                                <i class="bi bi-receipt"></i> Struk
+                            </a>
+
+                            <!-- Tombol Hapus -->
+                            <form action="{{ route('checkup.destroy', $checkup->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger rounded-pill shadow-sm">
@@ -102,7 +119,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center text-muted">
+                        <td colspan="8" class="text-center text-muted">
                             <i class="bi bi-emoji-frown text-danger me-1"></i>Belum ada data periksa kesehatan.
                         </td>
                     </tr>

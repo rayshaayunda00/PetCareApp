@@ -78,10 +78,6 @@
         <p class="text-muted">Kelola semua data penitipan hewan di klinik secara rapi dan mudah</p>
     </div>
 
-    <div class="d-flex justify-content-end mb-3">
-        
-    </div>
-
     @if(session('success'))
         <div class="alert alert-success shadow-sm text-center">
             {{ session('success') }}
@@ -101,6 +97,7 @@
                     <th>Usia</th>
                     <th>Tgl Mulai</th>
                     <th>Tgl Selesai</th>
+                    <th>Catatan</th> {{-- Tambahan --}}
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -120,7 +117,11 @@
                         <td>{{ $pet->age ?? '-' }}</td>
                         <td>{{ $penitipan ? \Carbon\Carbon::parse($penitipan->start_date)->format('d-m-Y') : '-' }}</td>
                         <td>{{ $penitipan && $penitipan->end_date ? \Carbon\Carbon::parse($penitipan->end_date)->format('d-m-Y') : '-' }}</td>
+                        <td>{{ $penitipan->notes ?? '-' }}</td> {{-- Tambahan --}}
                         <td class="text-center">
+                            <a href="{{ route('penitipan.receipt', $owner->id) }}" target="_blank" class="btn btn-sm btn-success rounded-pill mb-1">
+                                <i class="bi bi-printer-fill"></i> Struk
+                            </a>
                             <form action="{{ route('penitipan.destroy', $owner->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                 @csrf
                                 @method('DELETE')
@@ -132,7 +133,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="10" class="text-center text-muted">Belum ada data penitipan.</td>
+                        <td colspan="11" class="text-center text-muted">Belum ada data penitipan.</td>
                     </tr>
                 @endforelse
             </tbody>

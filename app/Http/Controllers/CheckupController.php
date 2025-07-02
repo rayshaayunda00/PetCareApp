@@ -8,52 +8,59 @@ use App\Models\Vet;
 
 class CheckupController extends Controller
 {
+    // Form input pemeriksaan
     public function form()
     {
-        return view('checkup.form');
+        $randomVet = Vet::inRandomOrder()->first();
+        return view('checkup.form', compact('randomVet'));
     }
 
+    // Submit dan simpan data checkup
     public function submit(Request $request)
     {
         $request->validate([
-            'pet_name'  => 'required|string',
-            'species'   => 'required|string',
-            'vet_name'  => 'required|string', // Ini maksudnya: umur hewan
-            'date'      => 'required|date',
-            'treatment' => 'required|string',
+            'pet_name'    => 'required|string',
+            'species'     => 'required|string',
+            'vet_name'    => 'required|string', // Umur hewan
+            'date'        => 'required|date',
+            'treatment'   => 'required|string',
+            'doctor_name' => 'required|string',
         ]);
 
-        // Simpan data pemeriksaan
         $checkup = Checkup::create([
-            'pet_name'  => $request->pet_name,
-            'species'   => $request->species,
-            'vet_name'  => $request->vet_name, // "vet_name" sebagai umur hewan
-            'date'      => $request->date,
-            'treatment' => $request->treatment,
+            'pet_name'    => $request->pet_name,
+            'species'     => $request->species,
+            'vet_name'    => $request->vet_name,
+            'date'        => $request->date,
+            'treatment'   => $request->treatment,
+            'doctor_name' => $request->doctor_name,
         ]);
 
-        // Ambil nama dokter secara acak (tidak disimpan ke DB)
-        $randomVet = Vet::inRandomOrder()->first();
-        $doctorName = $randomVet ? $randomVet->name : 'Tidak tersedia';
-
-        // Kirim data ke session (termasuk nama dokter)
         return back()
             ->with('success', 'Data berhasil disimpan!')
-            ->with('checkup', $checkup)
-            ->with('doctor_name', $doctorName);
+            ->with('checkup', $checkup);
     }
 
+    // Tampilkan daftar checkup
     public function index()
     {
         $checkups = Checkup::all();
         return view('checkup.index', compact('checkups'));
     }
 
+    // Hapus data checkup
     public function destroy($id)
     {
         $checkup = Checkup::findOrFail($id);
         $checkup->delete();
 
         return redirect()->route('checkup.index')->with('success', 'Data berhasil dihapus!');
+    }
+
+    // Tampilkan struk berdasarkan ID
+    public function receipt($id)
+    {
+        $checkup = Checkup::findOrFail($id);
+        return view('checkup.receipt', compact('checkup'));
     }
 }

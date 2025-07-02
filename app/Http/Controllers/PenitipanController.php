@@ -179,5 +179,14 @@ public function submitPublic(Request $request)
     ]);
 
 }
+public function cetakStruk($id)
+{
+   $owner = Owner::with('pets.penitipan')->findOrFail($id);
+    $pet = $owner->pets->first();
+    $penitipan = $pet?->penitipan;
+
+    return view('penitipan.receipt', compact('owner', 'pet', 'penitipan'));
+}
+
 
 }

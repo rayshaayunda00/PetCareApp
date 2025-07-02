@@ -12,9 +12,11 @@ class VaccinationController extends Controller
 
 
     public function form()
-    {
-        return view('vaccination.form');
-    }
+{
+    $randomVet = Vet::inRandomOrder()->first();
+    return view('vaccination.form', compact('randomVet'));
+}
+
 
 public function submit(Request $request)
 {
@@ -23,22 +25,21 @@ public function submit(Request $request)
         'vaccine_type'      => 'required|string|max:255',
         'vaccination_date'  => 'required|date',
         'notes'             => 'nullable|string',
+        'doctor_name'       => 'required|string|max:255',
     ]);
 
-    $vaccination = Vaccination::create($request->only([
-        'pet_name', 'vaccine_type', 'vaccination_date', 'notes'
-    ]));
-
-    // Ambil nama dokter secara acak dari tabel vets
-    $randomVet = Vet::inRandomOrder()->first();
-    $doctorName = $randomVet ? $randomVet->name : 'Tidak tersedia';
+    $vaccination = Vaccination::create([
+        'pet_name'         => $request->pet_name,
+        'vaccine_type'     => $request->vaccine_type,
+        'vaccination_date' => $request->vaccination_date,
+        'notes'            => $request->notes,
+        'doctor_name'      => $request->doctor_name,
+    ]);
 
     return back()
         ->with('success', 'Data vaksinasi berhasil disimpan!')
-        ->with('vaccination', $vaccination)
-        ->with('doctor_name', $doctorName);
+        ->with('vaccination', $vaccination);
 }
-
 
     // ================= ADMIN =================
 
@@ -104,10 +105,9 @@ public function submit(Request $request)
     // ================= STRUK =================
 
     public function receipt($id)
-    {
-        $vaccination = Vaccination::findOrFail($id);
-        $doctorName = Vet::inRandomOrder()->first()?->name ?? 'Tidak tersedia';
+{
+    $vaccination = Vaccination::findOrFail($id);
+    return view('vaccination.receipt', compact('vaccination'));
+}
 
-        return view('vaccination.receipt', compact('vaccination', 'doctorName'));
-    }
 }

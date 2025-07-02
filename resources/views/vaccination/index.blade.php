@@ -83,23 +83,25 @@
         <table class="table table-bordered table-hover vaksin-table">
             <thead>
                 <tr>
-                    <th><i class="bi bi-list-ol emoji-icon"></i>No</th>
-                    <th><i class="bi bi-patch-plus emoji-icon"></i>Nama Hewan</th>
-                    <th><i class="bi bi-capsule-pill emoji-icon"></i>Jenis Vaksin</th>
-                    <th><i class="bi bi-calendar-check emoji-icon"></i>Tanggal</th>
-                    <th><i class="bi bi-journal-text emoji-icon"></i>Catatan</th>
-                    <th><i class="bi bi-tools emoji-icon"></i>Aksi</th>
+                    <th>No</th>
+                    <th>Nama Hewan</th>
+                    <th>Dokter</th>
+                    <th>Jenis Vaksin</th>
+                    <th>Tanggal</th>
+                    <th>Catatan</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($vaccinations as $vaccination)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td><i class="bi bi-heart-pulse-fill pet-icon text-danger"></i>{{ $vaccination->pet_name }}</td>
+                        <td>{{ $vaccination->pet_name }}</td>
+                        <td>{{ $vaccination->doctor_name ?? '-' }}</td>
                         <td>{{ $vaccination->vaccine_type }}</td>
                         <td>{{ \Carbon\Carbon::parse($vaccination->vaccination_date)->translatedFormat('d M Y') }}</td>
                         <td>{{ $vaccination->notes ?? '-' }}</td>
-                        <td class="text-center">
+                        <td>
                             <!-- Tombol Struk -->
                             <a href="{{ route('vaccination.receipt', $vaccination->id) }}" class="btn btn-success btn-sm shadow-sm mb-1">
                                 <i class="bi bi-receipt"></i> Struk
@@ -117,7 +119,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center text-muted">
+                        <td colspan="7" class="text-center text-muted">
                             <i class="bi bi-emoji-frown text-danger me-1"></i>Belum ada data vaksinasi.
                         </td>
                     </tr>

@@ -78,6 +78,7 @@
         }
     </style>
 </head>
+<!-- ... tetap bagian head dan style seperti punyamu ... -->
 <body>
 
     <!-- Sidebar -->
@@ -85,23 +86,33 @@
         <div class="logo">
             <i class="bi bi-hospital-fill me-2"></i>PetCareDB
         </div>
+
         <a href="{{ route('admin.dashboard') }}" class="nav-link">
             <i class="bi bi-speedometer2 me-2"></i> Dashboard
         </a>
+
         <a href="{{ route('penitipan.index') }}" class="nav-link">
             <i class="bi bi-box-seam me-2"></i> Penitipan
         </a>
+
         <a href="{{ route('vaccination.index') }}" class="nav-link">
             <i class="bi bi-capsule-pill me-2"></i> Vaksinasi
         </a>
+
         <a href="{{ route('checkup.index') }}" class="nav-link">
             <i class="bi bi-heart-pulse me-2"></i> Periksa Kesehatan
         </a>
+
         <a href="{{ route('doctors.index') }}" class="nav-link">
-    <i class="bi bi-person-badge me-2"></i> Dokter
-</a>
+            <i class="bi bi-person-badge me-2"></i> Dokter
+        </a>
 
+        <!-- ✅ Artikel Edukasi -->
+        <a href="{{ route('admin.articles.index') }}" class="nav-link">
+            <i class="bi bi-journal-text me-2"></i> Artikel
+        </a>
 
+        <!-- Logout -->
         <form method="POST" action="{{ route('logout') }}" class="logout-form">
             @csrf
             <button type="submit" class="logout-btn">

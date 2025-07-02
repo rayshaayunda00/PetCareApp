@@ -94,13 +94,15 @@
     </div>
 </nav>
 
-<!-- Hero Section -->
 <section class="hero text-center">
-    <div class="container">
-        <h1 class="display-5 fw-bold">Selamat Datang di Klinik Hewan PetCareDB</h1>
-        <p class="lead">Klinik terpercaya untuk kesehatan hewan kesayangan Anda</p>
-        <a href="#layanan" class="btn btn-light btn-lg btn-custom mt-3">Lihat Layanan Kami</a>
-    </div>
+  <div class="container">
+    <!-- Ganti ikon statis dengan GIF animasi -->
+   <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Pet Icon" class="mb-4" style="max-width:120px;">
+
+    <h1 class="display-5 fw-bold">Selamat Datang di Klinik Hewan PetCareDB</h1>
+    <p class="lead">Kami merawat hewan kesayangan Anda dengan penuh kasih 🐾</p>
+    <a href="#layanan" class="btn btn-light btn-lg btn-custom mt-3">Lihat Layanan Kami</a>
+  </div>
 </section>
 
 <!-- Layanan -->
@@ -186,6 +188,22 @@
         </div>
     </div>
 </section>
+<!-- Artikel Edukasi Hewan -->
+<section id="artikel" class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">📚 Artikel Edukasi Hewan</h2>
+    <div class="row g-4">
+        @foreach ($articles as $article)
+        <div class="col-md-4">
+
+        </div>
+        @endforeach
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{{ route('articles.public.index') }}" class="btn btn-outline-primary rounded-pill">Lihat Semua Artikel</a>
+    </div>
+</section>
+
 
 <!-- Kontak -->
 <section id="kontak" class="container mt-5 mb-5">

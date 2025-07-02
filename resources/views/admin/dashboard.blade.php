@@ -160,6 +160,18 @@
             </div>
         </div>
 
+        <!-- Artikel -->
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 d-flex">
+            <div class="dashboard-card w-100">
+                <div class="dashboard-icon" style="background-color: #ffe3f0;">
+                    📚
+                </div>
+                <div class="dashboard-label">Artikel</div>
+                <div class="dashboard-desc">Kelola artikel edukasi hewan 🐾</div>
+                <a href="{{ route('admin.articles.index') }}" class="btn btn-info btn-pill mt-auto text-white">Masuk</a>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection

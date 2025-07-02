@@ -63,7 +63,7 @@
 <!-- Artikel List -->
 <div class="container mt-5 mb-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Artikel Edukasi Hewan</h2>
+        <h2 class="fw-bold">📚 Artikel Edukasi Hewan</h2>
         <a href="{{ route('home') }}" class="btn btn-outline-secondary rounded-pill">
             ← Kembali ke Beranda
         </a>
@@ -73,15 +73,15 @@
         @forelse ($articles as $article)
             <div class="col-md-4">
                 <div class="card h-100">
-                    @if($article->gambar_cover)
-                        <img src="{{ asset($article->gambar_cover) }}" class="card-img-top" alt="{{ $article->judul }}">
+                    @if($article->image)
+                        <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="{{ $article->title }}">
                     @else
                         <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="card-img-top" alt="cover">
                     @endif
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">{{ $article->judul }}</h5>
+                        <h5 class="card-title">{{ $article->title }}</h5>
                         <p class="card-text text-muted">
-                            {{ Str::limit(strip_tags($article->isi), 100) }}
+                            {{ Str::limit(strip_tags($article->content), 100) }}
                         </p>
                         <div class="mt-auto">
                             <a href="{{ route('articles.public.show', $article->slug) }}" class="btn btn-outline-primary rounded-pill mt-2">Baca Selengkapnya</a>
@@ -101,8 +101,6 @@
             {{ $articles->links() }}
         </div>
     @endif
-</div>
-
 </div>
 
 <!-- Footer -->

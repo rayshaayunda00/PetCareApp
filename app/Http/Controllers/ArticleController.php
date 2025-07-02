@@ -16,18 +16,20 @@ class ArticleController extends Controller
 }
 
     // Detail artikel berdasarkan slug
-    public function show($id)
-{
-    $article = Article::findOrFail($id);
-    return view('admin.articles.show', compact('article'));
-}
+     public function show($slug)
+    {
+        $article = Article::where('slug', $slug)->firstOrFail();
+        return view('public.articles.show', compact('article'));
+    }
+
 
 
     // Admin: daftar artikel
     public function index()
     {
-        $articles = Article::latest()->paginate(10);
-        return view('admin.articles.index', compact('articles'));
+        $articles = Article::latest()->paginate(6);
+        // return view('articles.public.index', compact('articles'));
+         return view('admin.articles.index', compact('articles'));
     }
 
     // Admin: form tambah artikel
@@ -94,14 +96,22 @@ public function update(Request $request, $id)
 
 
     // Admin: hapus artikel
-    public function destroy($id)
-    {
-        $article = Article::findOrFail($id);
-        if ($article->image && \Storage::disk('public')->exists($article->image)) {
-            \Storage::disk('public')->delete($article->image);
-        }
-        $article->delete();
-
-        return redirect()->route('admin.articles.index')->with('success', 'Artikel berhasil dihapus.');
+    // Admin: hapus artikel
+public function destroy($id)
+{
+    $article = Article::findOrFail($id);
+    if ($article->image && \Storage::disk('public')->exists($article->image)) {
+        \Storage::disk('public')->delete($article->image);
     }
+    $article->delete();
+
+    return redirect()->route('admin.articles.index')->with('success', 'Artikel berhasil dihapus.');
+}
+
+// Admin: detail artikel berdasarkan ID
+public function showById($id)
+{
+    $article = Article::findOrFail($id);
+    return view('admin.articles.show', compact('article'));
+}
 }

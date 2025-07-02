@@ -2,29 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ $article->judul }} - PetCareDB</title>
+    <title>{{ $article->title }} - PetCareDB</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap & Font -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f8f9fa;
-            line-height: 1.8;
         }
         .navbar {
             background: linear-gradient(90deg, #4d9fda, #1e67a8);
         }
-        .content-wrapper {
-            background-color: white;
-            padding: 40px;
+        .card {
+            border: none;
             border-radius: 20px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
         .article-cover {
-            max-height: 400px;
+            width: 100%;
+            max-height: 300px;
             object-fit: cover;
             border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         footer {
             background: #1e67a8;
@@ -32,9 +35,6 @@
             padding: 20px 0;
             border-radius: 30px 30px 0 0;
             margin-top: 50px;
-        }
-        .btn-back {
-            border-radius: 30px;
         }
     </style>
 </head>
@@ -47,21 +47,39 @@
     </div>
 </nav>
 
-<!-- Artikel Detail -->
+<!-- Detail Artikel -->
 <div class="container my-5">
-    <div class="content-wrapper">
-        <a href="{{ route('articles.public.index') }}" class="btn btn-outline-secondary mb-3 btn-back">&larr; Kembali ke Artikel</a>
+    <h2 class="fw-bold mb-4 text-center">📖 Detail Artikel Edukasi Hewan</h2>
 
-        <h1 class="fw-bold">{{ $article->judul }}</h1>
-        <p class="text-muted small">Dipublikasikan pada {{ $article->created_at->format('d M Y') }}</p>
+    <div class="card p-4">
+        <div class="row g-4 align-items-start">
+            <!-- Informasi artikel -->
+            <div class="col-md-7">
+                <h3 class="fw-bold">{{ $article->title }}</h3>
+                <p class="text-muted mb-1">Slug: <code>{{ $article->slug }}</code></p>
+                <p class="text-muted small">Dipublikasikan: {{ $article->created_at->format('d M Y, H:i') }}</p>
 
-        @if($article->gambar_cover)
-            <img src="{{ asset($article->gambar_cover) }}" alt="{{ $article->judul }}" class="img-fluid mb-4 article-cover">
-        @endif
+                <div class="mt-4">
+                    <h5 class="fw-semibold">Isi Artikel:</h5>
+                    <div class="text-dark" style="line-height: 1.8">
+                        {!! $article->content !!}
+                    </div>
+                </div>
+            </div>
 
-        <div class="article-content">
-            {!! $article->isi !!}
+            <!-- Gambar artikel -->
+            <div class="col-md-5">
+                @if($article->image)
+                    <img src="{{ asset('storage/' . $article->image) }}" alt="Gambar Artikel" class="article-cover">
+                @else
+                    <div class="text-muted text-center">Tidak ada gambar</div>
+                @endif
+            </div>
         </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ route('articles.public.index') }}" class="btn btn-outline-secondary rounded-pill">← Kembali ke Daftar Artikel</a>
     </div>
 </div>
 

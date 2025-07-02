@@ -61,38 +61,36 @@ public function store(Request $request)
 }
 
     // Admin: edit form
-    public function edit($id)
-    {
-        $article = Article::findOrFail($id);
-        return view('admin.articles.edit', compact('article'));
+   public function edit($id)
+{
+    $article = Article::findOrFail($id);
+    return view('admin.articles.edit', compact('article'));
+}
+
+public function update(Request $request, $id)
+{
+    $article = Article::findOrFail($id);
+
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $article->title = $request->title;
+    $article->content = $request->content;
+
+    // Jika ada gambar baru
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('articles', 'public');
+        $article->image = $imagePath;
     }
 
-    // Admin: update artikel
-    public function update(Request $request, $id)
-    {
-        $article = Article::findOrFail($id);
+    $article->save();
 
-        $request->validate([
-    'judul' => 'required|max:255',
-    'isi' => 'required',
-    'gambar_cover' => 'nullable|image|max:2048'
-]);
+    return redirect()->route('admin.articles.index')->with('success', 'Artikel berhasil diupdate.');
+}
 
-
-        $imagePath = $article->image;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('articles', 'public');
-        }
-
-        $article->update([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'content' => $request->content,
-            'image' => $imagePath
-        ]);
-
-        return redirect()->route('admin.articles.index')->with('success', 'Artikel berhasil diperbarui.');
-    }
 
     // Admin: hapus artikel
     public function destroy($id)

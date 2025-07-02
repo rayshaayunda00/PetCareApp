@@ -110,6 +110,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Beranda</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/#layanan') }}">Layanan</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/#dokter') }}">Dokter Hewan</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('articles.public.index') }}">Artikel</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/#kontak') }}">Kontak</a></li>
             </ul>
         </div>

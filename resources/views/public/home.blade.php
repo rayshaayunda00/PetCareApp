@@ -190,12 +190,19 @@
 <!-- Kontak -->
 <section id="kontak" class="container mt-5 mb-5">
     <h2 class="text-center fw-bold mb-4">Kontak Kami</h2>
-    <div class="text-center">
-        <p>Jl. Mawar No. 12, Bandung</p>
-        <p>Telp: 022-12345678</p>
-        <p>Email: info@petcaredb.com</p>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 text-center shadow-sm" style="border-radius: 20px;">
+                <img src="https://cdn-icons-png.flaticon.com/512/535/535137.png" width="70" class="mx-auto mb-3">
+                <h5 class="fw-semibold">Klinik Hewan PetCareDB</h5>
+                <p class="mb-2"><i class="bi bi-geo-alt-fill me-2 text-primary"></i>Jl. Mawar No. 12, Bandung</p>
+                <p class="mb-2"><i class="bi bi-telephone-fill me-2 text-success"></i>022-12345678</p>
+                <p class="mb-0"><i class="bi bi-envelope-fill me-2 text-danger"></i>info@petcaredb.com</p>
+            </div>
+        </div>
     </div>
 </section>
+
 
 <!-- Footer -->
 <footer class="text-center">

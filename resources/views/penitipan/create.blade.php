@@ -33,6 +33,32 @@
 </head>
 <body>
 
+<!-- Navbar Modern & Responsif -->
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background: linear-gradient(90deg, #4d9fda, #1e67a8);">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="{{ url('/') }}">
+      <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
+      PetCareDB
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="{{ url('/') }}" class="nav-link btn btn-light text-dark rounded-pill px-3 fw-semibold">
+            ← Kembali ke Beranda
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
 <div class="container mt-5">
     <div class="card mx-auto" style="max-width:600px;">
         <h2>Formulir Penitipan Hewan</h2>

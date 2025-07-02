@@ -8,6 +8,7 @@
         border-radius: 20px;
         margin-bottom: 30px;
         text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     .penitipan-header h2 {
@@ -20,6 +21,7 @@
         vertical-align: middle;
         background-color: #0d6efd;
         color: white;
+        text-align: center;
     }
 
     .penitipan-table td {
@@ -31,13 +33,22 @@
     }
 
     .btn-add {
-        background-color: #4caf50;
+        background-color: #28a745;
         color: white;
     }
 
     .btn-add:hover {
-        background-color: #449d48;
+        background-color: #218838;
         color: white;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        border: none;
+    }
+
+    .btn-danger:hover {
+        background-color: #c0392b;
     }
 
     .alert-success {
@@ -47,6 +58,11 @@
     .table-responsive {
         border-radius: 15px;
         overflow: hidden;
+        background-color: white;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f9ff;
     }
 
     @media (max-width: 768px) {
@@ -57,15 +73,13 @@
 </style>
 
 <div class="container">
-    <div class="penitipan-header shadow-sm">
+    <div class="penitipan-header">
         <h2><i class="bi bi-house-heart-fill me-2"></i>Data Penitipan Hewan</h2>
         <p class="text-muted">Kelola semua data penitipan hewan di klinik secara rapi dan mudah</p>
     </div>
 
     <div class="d-flex justify-content-end mb-3">
-        <a href="{{ route('penitipan.create') }}" class="btn btn-add btn-rounded shadow-sm">
-            <i class="bi bi-plus-circle me-1"></i> Tambah Data
-        </a>
+        
     </div>
 
     @if(session('success'))
@@ -76,7 +90,7 @@
 
     <div class="table-responsive shadow-sm">
         <table class="table table-bordered table-hover penitipan-table">
-            <thead class="text-center">
+            <thead>
                 <tr>
                     <th>No</th>
                     <th>Nama Pemilik</th>
@@ -107,17 +121,11 @@
                         <td>{{ $penitipan ? \Carbon\Carbon::parse($penitipan->start_date)->format('d-m-Y') : '-' }}</td>
                         <td>{{ $penitipan && $penitipan->end_date ? \Carbon\Carbon::parse($penitipan->end_date)->format('d-m-Y') : '-' }}</td>
                         <td class="text-center">
-                            <a href="{{ route('penitipan.show', $owner->id) }}" class="btn btn-info btn-sm btn-rounded mb-1">
-                                <i class="bi bi-eye"></i>
-                            </a>
-                            <a href="{{ route('penitipan.edit', $owner->id) }}" class="btn btn-warning btn-sm btn-rounded mb-1">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
                             <form action="{{ route('penitipan.destroy', $owner->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm btn-rounded">
-                                    <i class="bi bi-trash"></i>
+                                    <i class="bi bi-trash"></i> Hapus
                                 </button>
                             </form>
                         </td>

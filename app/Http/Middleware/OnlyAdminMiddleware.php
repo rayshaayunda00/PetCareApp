@@ -6,13 +6,15 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LimitedAdminMiddleware
+class OnlyAdminMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role === 'admin_limited') {
+        if (Auth::check() && Auth::user()->role === 'admin') {
             return $next($request);
         }
-        return redirect('/')->with('error', 'Akses ditolak. Hanya admin terbatas yang diizinkan.');
+
+        // Redirect ke halaman error jika bukan admin biasa
+        return response()->view('errors.no-access', [], 403);
     }
 }

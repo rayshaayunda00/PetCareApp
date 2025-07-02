@@ -3,148 +3,134 @@
 @section('content')
 <style>
     .dashboard-wrapper {
-        background: linear-gradient(to right, #e3f2fd, #fce4ec);
+        background: linear-gradient(120deg, #e3f2fd, #fce4ec, #e0f7f4);
         padding: 40px 20px;
-        border-radius: 20px;
+        border-radius: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        animation: fadeIn 1s ease-in-out;
     }
 
     .dashboard-title {
-        font-weight: 700;
-        font-size: 2rem;
-        color: #1e67a8;
+        font-weight: 800;
+        font-size: 2.2rem;
+        color: #0d6efd;
     }
 
     .welcome-text {
-        font-size: 1.1rem;
-        color: #555;
+        font-size: 1.15rem;
+        color: #444;
     }
 
     .dashboard-card {
-        background-color: white;
+        background: white;
         border: none;
-        border-radius: 20px;
-        padding: 30px 20px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        border-radius: 25px;
+        padding: 30px 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         text-align: center;
-        transition: 0.3s ease;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
     }
 
     .dashboard-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+        transform: translateY(-6px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
     }
 
     .dashboard-icon {
-        font-size: 3.5rem;
-        background-color: #f0f8ff;
-        color: #1e67a8;
+        font-size: 3.2rem;
         border-radius: 50%;
         padding: 20px;
         margin-bottom: 15px;
         display: inline-block;
+        transition: transform 0.3s;
+    }
+
+    .dashboard-card:hover .dashboard-icon {
+        transform: rotate(10deg) scale(1.1);
     }
 
     .dashboard-label {
-        font-size: 1.2rem;
-        font-weight: 600;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #333;
     }
 
     .dashboard-desc {
         font-size: 0.95rem;
         color: #777;
-        margin-bottom: 12px;
+        margin-bottom: 15px;
     }
 
-    .btn-pink {
-        background-color: #ffb6c1;
-        color: white;
-        border: none;
+    .btn-pill {
+        border-radius: 50px;
+        padding: 10px 25px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
     }
 
-    .btn-pink:hover {
-        background-color: #f590a0;
-        color: white;
-    }
-
-    .btn-sky {
-        background-color: #89caff;
-        color: white;
-        border: none;
-    }
-
-    .btn-sky:hover {
-        background-color: #5ab0f7;
-        color: white;
-    }
-
-    .btn-mint {
-        background-color: #95f1c2;
-        color: #06623b;
-        border: none;
-    }
-
-    .btn-mint:hover {
-        background-color: #7ce4af;
-        color: #06623b;
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 </style>
 
 <div class="container dashboard-wrapper">
     <div class="text-center mb-5">
-        <h1 class="dashboard-title">🎉 Selamat Datang di Dashboard Admin PetCareDB!</h1>
-        <p class="welcome-text">Halo, <strong>{{ Auth::user()->name }}</strong> 🐾 (Role: {{ Auth::user()->role }})</p>
+        <h1 class="dashboard-title">🎉 Selamat Datang, {{ Auth::user()->name }}!</h1>
+        <p class="welcome-text">🩺 Role: <strong>{{ Auth::user()->role }}</strong> • Siap mengelola klinik hewanmu hari ini?</p>
     </div>
 
     <div class="row g-4 justify-content-center">
 
         <!-- Penitipan -->
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-3 col-sm-6">
             <div class="dashboard-card">
-                <div class="dashboard-icon" style="background-color: #d0ebff; color: #0d6efd;">
+                <div class="dashboard-icon bg-primary text-white">
                     <i class="bi bi-house-heart-fill"></i>
                 </div>
-                <div class="dashboard-label">Penitipan Hewan</div>
-                <div class="dashboard-desc">Pantau data penitipan aktif.</div>
-                <a href="{{ route('penitipan.index') }}" class="btn btn-sky rounded-pill px-4">Lihat</a>
+                <div class="dashboard-label">Penitipan</div>
+                <div class="dashboard-desc">Pantau hewan yang sedang dititipkan.</div>
+                <a href="{{ route('penitipan.index') }}" class="btn btn-primary btn-pill">Masuk</a>
             </div>
         </div>
 
         <!-- Vaksinasi -->
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-3 col-sm-6">
             <div class="dashboard-card">
-                <div class="dashboard-icon" style="background-color: #ffe0f0; color: #e83e8c;">
+                <div class="dashboard-icon bg-pink text-white" style="background-color:#ff91a4;">
                     <i class="bi bi-capsule-pill"></i>
                 </div>
                 <div class="dashboard-label">Vaksinasi</div>
-                <div class="dashboard-desc">Jaga kesehatan hewan dari penyakit.</div>
-                <a href="{{ route('vaccination.index') }}" class="btn btn-pink rounded-pill px-4">Lihat</a>
+                <div class="dashboard-desc">Jadwal dan histori vaksinasi.</div>
+                <a href="{{ route('vaccination.index') }}" class="btn btn-danger btn-pill">Masuk</a>
             </div>
         </div>
 
         <!-- Periksa Kesehatan -->
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-3 col-sm-6">
             <div class="dashboard-card">
-                <div class="dashboard-icon" style="background-color: #e0f7f4; color: #0ca678;">
+                <div class="dashboard-icon text-white" style="background-color:#20c997;">
                     <i class="bi bi-heart-pulse-fill"></i>
                 </div>
-                <div class="dashboard-label">Periksa Kesehatan</div>
-                <div class="dashboard-desc">Lihat hasil & riwayat pemeriksaan.</div>
-                <a href="{{ route('checkup.index') }}" class="btn btn-mint rounded-pill px-4">Lihat</a>
+                <div class="dashboard-label">Pemeriksaan</div>
+                <div class="dashboard-desc">Catatan dan diagnosa kesehatan.</div>
+                <a href="{{ route('checkup.index') }}" class="btn btn-success btn-pill">Masuk</a>
             </div>
         </div>
 
-
-<!-- Dokter -->
-<div class="col-md-4 col-sm-6">
-    <div class="dashboard-card">
-        <div class="dashboard-icon" style="background-color: #f3e5f5; color: #6a1b9a;">
-            <i class="bi bi-person-badge-fill"></i>
+        <!-- Dokter -->
+        <div class="col-md-3 col-sm-6">
+            <div class="dashboard-card">
+                <div class="dashboard-icon text-white" style="background-color:#6f42c1;">
+                    <i class="bi bi-person-badge-fill"></i>
+                </div>
+                <div class="dashboard-label">Dokter</div>
+                <div class="dashboard-desc">Kelola profil dokter klinik.</div>
+                <a href="{{ url('admin/dokter') }}" class="btn btn-secondary btn-pill">Masuk</a>
+            </div>
         </div>
-        <div class="dashboard-label">Dokter</div>
-        <div class="dashboard-desc">Kelola data dokter hewan klinik.</div>
-        <a href="{{ url('admin/dokter') }}" class="btn btn-secondary rounded-pill px-4">Lihat</a>
-    </div>
-</div>
 
     </div>
 </div>

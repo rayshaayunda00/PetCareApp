@@ -54,6 +54,8 @@ class Kernel extends HttpKernel
 
     // ✅ Ini yang dipakai saja:
     'admin' => \App\Http\Middleware\AdminMiddleware::class,
+    'onlyadmin' => \App\Http\Middleware\OnlyAdminMiddleware::class,
+
 ];
 
 

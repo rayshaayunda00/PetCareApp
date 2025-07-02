@@ -99,7 +99,13 @@
                         <td>{{ $vaccination->vaccine_type }}</td>
                         <td>{{ \Carbon\Carbon::parse($vaccination->vaccination_date)->translatedFormat('d M Y') }}</td>
                         <td>{{ $vaccination->notes ?? '-' }}</td>
-                        <td>
+                        <td class="text-center">
+                            <!-- Tombol Struk -->
+                            <a href="{{ route('vaccination.receipt', $vaccination->id) }}" class="btn btn-success btn-sm shadow-sm mb-1">
+                                <i class="bi bi-receipt"></i> Struk
+                            </a>
+
+                            <!-- Tombol Hapus -->
                             <form action="{{ route('vaccination.destroy', $vaccination->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                 @csrf
                                 @method('DELETE')

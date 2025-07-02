@@ -67,6 +67,8 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
     // Vaksinasi
     Route::resource('/vaccination', VaccinationController::class);
+    Route::get('/admin/vaccination/{id}/receipt', [VaccinationController::class, 'receipt'])->name('vaccination.receipt');
+
 
     // Pemeriksaan Kesehatan
     Route::get('/checkup', [CheckupController::class, 'index'])->name('checkup.index');

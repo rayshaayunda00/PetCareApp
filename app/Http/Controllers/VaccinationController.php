@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vaccination;
-use App\Models\Vet; 
+use App\Models\Vet;
 
 class VaccinationController extends Controller
 {
@@ -100,5 +100,14 @@ public function submit(Request $request)
         $vaccination->delete();
 
         return redirect()->route('vaccination.index')->with('success', 'Data berhasil dihapus.');
+    }
+    // ================= STRUK =================
+
+    public function receipt($id)
+    {
+        $vaccination = Vaccination::findOrFail($id);
+        $doctorName = Vet::inRandomOrder()->first()?->name ?? 'Tidak tersedia';
+
+        return view('vaccination.receipt', compact('vaccination', 'doctorName'));
     }
 }

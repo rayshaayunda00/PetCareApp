@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetCareDB - Klinik Hewan</title>
+    <title>PetCareRaysha - Klinik Hewan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
@@ -28,7 +28,7 @@
 
     .crazy-title {
         font-family: 'Fredoka One', cursive;
-        text-transform: uppercase;
+        /* text-transform: uppercase; */
         background: linear-gradient(45deg, var(--blue2), var(--blue3));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -48,10 +48,10 @@
 
     .navbar-brand {
         font-family: 'Fredoka One', cursive;
-        font-size: 2.5rem;
+        font-size: 2.0rem;
         color: white !important;
         text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
-        transform: rotate(-5deg);
+        /* transform: rotate(-5deg); */
         display: inline-block;
         background: linear-gradient(45deg, var(--blue4), white);
         -webkit-background-clip: text;
@@ -387,7 +387,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <i class="bi bi-heart-pulse-fill me-2"></i>PetCareDB
+            <i class="bi bi-heart-pulse-fill me-2"></i>PetCare Raysha
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -441,7 +441,7 @@
     <div class="container position-relative">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
-                <h1 class="crazy-title display-3 mb-4">PetCareDB</h1>
+                <h1 class="crazy-title display-3 mb-4">PetCare Raysha</h1>
                 <h2 class="text-white mb-4">Klinik Hewan <span class="text-warning">Terbaik</span> di Kota!</h2>
                 <p class="lead mb-5">Tempat di mana hewan peliharaan mendapatkan perawatan kelas dunia dengan sentuhan personal!</p>
                 <div class="d-flex flex-wrap gap-4 justify-content-center justify-content-lg-start">
@@ -625,11 +625,11 @@
             <a href="#" class="text-white mx-3 fs-3"><i class="bi bi-twitter"></i></a>
             <a href="#" class="text-white mx-3 fs-3"><i class="bi bi-whatsapp"></i></a>
         </div>
-        <h3 class="mb-3 crazy-title">PetCareDB</h3>
+        <h3 class="mb-3 crazy-title">PetCareRaysha</h3>
         <p class="mb-2">
             <i class="bi bi-heart-fill text-warning"></i> Merawat dengan Cinta dan Kompetensi <i class="bi bi-heart-fill text-warning"></i>
         </p>
-        <p class="mb-0">&copy; 2025 PetCareDB. All Rights Reserved.</p>
+        <p class="mb-0">&copy; 2025 PetCareRaysha. All Rights Reserved.</p>
     </div>
 </footer>
 

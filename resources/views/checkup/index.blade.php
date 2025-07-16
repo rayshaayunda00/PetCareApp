@@ -82,7 +82,7 @@
             <thead>
                 <tr>
                     <th><i class="bi bi-list-ol icon-pet"></i>No</th>
-                    <th><i class="bi bi-bug icon-pet"></i>Nama Hewan</th>
+                    <th><i class="bi bi-bug icon-pet"></i>Nama Pemilik/Hewan</th>
                     <th><i class="bi bi-feather icon-pet"></i>Spesies</th>
                     <th><i class="bi bi-person-bounding-box icon-pet"></i>Umur</th>
                     <th><i class="bi bi-person-vcard icon-pet"></i>Dokter</th>

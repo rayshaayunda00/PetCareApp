@@ -92,7 +92,7 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
 /*
 |--------------------------------------------------------------------------
-| Dokter (Khusus Admin Biasa)
+| Dokter (Khusus Admin utama)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', OnlyAdminMiddleware::class])->prefix('admin')->group(function () {
@@ -117,3 +117,4 @@ Route::middleware(['auth'])->group(function () {
         return view('user.dashboard');
     })->name('user.dashboard');
 });
+

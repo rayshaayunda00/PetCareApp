@@ -40,7 +40,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="#">PetCareDB</a>
+            <a class="navbar-brand fw-bold" href="#">PetCareERyasha</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -56,7 +56,7 @@
     </nav>
 
     <div class="container mt-5">
-        <h2 class="text-center">Selamat Datang di Klinik Hewan PetCareDB</h2>
+        <h2 class="text-center">Selamat Datang di Klinik Hewan PetCareRaysha</h2>
         <p class="text-center">Sistem informasi perawatan hewan terpercaya untuk semua pemilik hewan kesayangan.</p>
 
         <div class="row mt-5 g-4">

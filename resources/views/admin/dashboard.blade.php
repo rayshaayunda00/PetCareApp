@@ -107,7 +107,7 @@
 <div class="container dashboard-wrapper">
     <div class="text-center mb-5">
         <h1 class="dashboard-title">🐾 Halo, {{ Auth::user()->name }}!</h1>
-        <p class="welcome-text">😺 Role: <strong>{{ Auth::user()->role }}</strong> • Selamat datang di PetCareDB!</p>
+        <p class="welcome-text">😺 Role: <strong>{{ Auth::user()->role }}</strong> • Selamat datang di PetCareRaysha!</p>
     </div>
 
     <div class="row g-4 justify-content-center">

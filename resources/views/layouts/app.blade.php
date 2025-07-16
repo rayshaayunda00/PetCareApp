@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PetCareDB Admin Panel</title>
+    <title>PetCareRaysha Admin Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS & Icons -->
@@ -84,7 +84,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
-            <i class="bi bi-hospital-fill me-2"></i>PetCareDB
+            <i class="bi bi-hospital-fill me-2"></i>PetCare Raysha
         </div>
 
         <a href="{{ route('admin.dashboard') }}" class="nav-link">
@@ -126,7 +126,7 @@
         @yield('content')
 
         <footer>
-            &copy; {{ date('Y') }} PetCareDB. All rights reserved.
+            &copy; {{ date('Y') }} PetCareRaysha. All rights reserved.
         </footer>
     </div>
 
